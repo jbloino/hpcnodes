@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build_backend = "hatchling.build"
+
+[project]
+name = "hpcnodes"
+version = "0.8.0"
+requires-python = ">=3.7"
+authors = [
+    {name = "Julien Bloino", email = "julien.bloino@gmail.com"}
+]
+maintainers = [
+    {name = "Julien Bloino", email = "julien.bloino@gmail.com"}
+]
+description = "A simple library system to manage HPC computing resources."
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["Gaussian", "HPC"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: System"
+]
+
+[project.urls]
+Repository = "https://github.com/jbloino/hpcnodes.git"
