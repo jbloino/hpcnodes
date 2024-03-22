@@ -14,7 +14,7 @@ maintainers = [
 ]
 description = "A simple library system to manage HPC computing resources."
 readme = "README.md"
-license = {file = "LICENSE"}
+license = {file = "LICENSE.txt"}
 keywords = ["Gaussian", "HPC"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -26,3 +26,6 @@ classifiers = [
 
 [project.urls]
 Repository = "https://github.com/jbloino/hpcnodes.git"
+
+[tool.setuptools]
+packages = ["hpcnodes"]
