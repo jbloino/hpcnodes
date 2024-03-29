@@ -565,7 +565,7 @@ def parse_ini(fname: str = PATH_INIFILE,
     dict
         Dictionary of node families.
     """
-    type_qtype_list = typing.List[typing.Union[str, int]]
+    type_qtype_list = typing.List[typing.Optional[typing.Union[str, int]]]
 
     def parse_queue_types(queue_types: str,
                           base_list: typing.Optional[type_qtype_list] = None,
@@ -587,13 +587,15 @@ def parse_ini(fname: str = PATH_INIFILE,
             try:
                 new_list = [int(item) for item in items]
             except ValueError:
-                new_list = [item for item in items]
+                new_list = [item if item != 'None' else None for item in items]
         elif len(base_list) > 0:
             func_conv = type(base_list[0])
             new_list = base_list[:]
             for item in items:
                 if item.startswith('-'):
                     value = func_conv(item[1:])
+                    if value == 'None':
+                        value = None
                     try:
                         new_list.remove(value)
                     except ValueError:
@@ -603,6 +605,8 @@ def parse_ini(fname: str = PATH_INIFILE,
                         value = func_conv(item[1:])
                     else:
                         value = func_conv(item)
+                    if value == 'None':
+                        value = None
                     if value not in new_list:
                         new_list.append(value)
         return new_list
@@ -693,7 +697,9 @@ def parse_ini(fname: str = PATH_INIFILE,
             queues = []
             if qtypes is not None:
                 for qtype in qtypes:
-                    qlabel = queue_pattern.format(qtype=qtype, qname=qname)
+                    qlabel = queue_pattern.format(
+                        qtype=qtype if qtype is not None else '',
+                        qname=qname)
                     queues.append(qlabel)
             optname = 'QueueList'
             if optname in sec_data:
