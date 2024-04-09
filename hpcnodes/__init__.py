@@ -589,7 +589,8 @@ def parse_ini(fname: str = PATH_INIFILE,
             except ValueError:
                 new_list = [item if item != 'None' else None for item in items]
         elif len(base_list) > 0:
-            func_conv = type(base_list[0])
+            x = base_list[-1] if base_list[0] is None else base_list[0]
+            func_conv = type(x)
             new_list = base_list[:]
             for item in items:
                 if item.startswith('-'):
